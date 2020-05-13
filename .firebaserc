@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "techy-d640f": {
+      "hosting": {
+        "techy": [
+          "techy-d640f"
+        ]
+      }
+    }
+  }
+}

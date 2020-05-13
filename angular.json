@@ -121,8 +121,13 @@
               "devServerTarget": "techy:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "techy"
 }

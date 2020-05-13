@@ -1,1 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+// Variables
+
+// colors
+$navy: #0E2439;
+$navy-light: #1F364D;
+
+
+$blue-light: #3EC5E0;
+$blue-dark: #4F6BED;
+$blue: #4799EB;
+
+
+$pink: #E6375A;
+$pink-light: #FF6092;
+$pink-orange: rgb(223, 109, 109);
+
+
+$slate-light: #9CB3C9;
+$slate: #385C80;
+$slate-dark: #274059;
+
+
+// fonts
+$oxanium: 'Oxanium', cursive;
+$robot: 'Roboto', sans-serif;
+
+
+// Mixins
+@mixin respond($breakpoint) {
+     @if $breakpoint==phone{
+        @media only screen and (max-width: 37.5em) {
+             @content
+        }; //600px
+    }
+    @if $breakpoint==tab-port {
+         @media only screen and (max-width: 56.25em){
+            @content
+        }; //900px
+    }
+    @if $breakpoint==tab-land {
+         @media only screen and (max-width: 75em){
+            @content
+        }; //1200px
+    }
+    @if $breakpoint==big-desktop {
+         @media only screen and (min-width: 112.5em){
+            @content
+        }; //1800
+    }
+}
+
+// Base Styling (Global Styling)
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    @include respond(tab-land) {
+        font-size: 56.25%;
+    }
+    @include respond(tab-port) {
+        font-size: 50%;
+    }
+    @include respond(big-desktop) {
+        font-size: 75%;
+    }
+
+}
+
+body {
+    box-sizing: border-box;
+    font-weight: 400;
+}
