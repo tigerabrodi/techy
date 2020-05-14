@@ -1,0 +1,85 @@
+@import "../../styles.scss";
+
+.footer {
+  overflow-x: hidden;
+  height: 40rem;
+  border-top: .3rem solid $navy-light;
+  position: static;
+  bottom: 0%;
+  &__wrapper {
+    border: .3rem solid $slate-light;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    @include respond(phone) {
+      width: 95%;
+      height: 85%;
+    }
+  }
+
+  &__brand {
+    text-transform: uppercase;
+    font-family: $roboto;
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 1rem;
+    text-align: center;
+    @include respond(tab-port) {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__title {
+    text-transform: capitalize;
+    font-family: $roboto;
+    color: $slate-light;
+    font-size: 2rem;
+    @include respond(tab-port) {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__image {
+    height: 3rem;
+    margin-right: 1rem;
+  }
+
+  &__text {
+    font-family: $oxanium;
+    font-size: 2.5rem;
+    width: 60%;
+    color: $slate-light;
+    text-align: center;
+    text-transform: capitalize;
+    word-wrap: break-word;
+    word-spacing: .5rem;
+    word-break: break-word;
+    @include respond(tab-port) {
+      font-size: 2.7rem;
+      width: 80%;
+    }
+    @include respond(phone) {
+      width: 95%;
+    }
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    @include respond(phone) {
+      flex-direction: column;
+      height: 40%;
+    }
+  }
+}

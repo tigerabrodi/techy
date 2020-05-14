@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     RouterModule,

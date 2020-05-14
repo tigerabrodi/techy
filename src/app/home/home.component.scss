@@ -2,6 +2,10 @@
 
 .home {
   height: 93vh;
+  @include respond(tab-port) {
+    height: 120vh;
+    margin-bottom: 30rem;
+  }
   &__box {
     position: relative;
     top: 16.4%;
