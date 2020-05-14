@@ -1,0 +1,61 @@
+@import "../../styles.scss";
+
+.home {
+  height: 93vh;
+  &__box {
+    position: relative;
+    top: 16.4%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    height: 22%;
+    width: 33rem;
+    border-radius: .5rem;
+    border: .3rem solid $navy-light;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    @include respond(tab-port) {
+      left: 50%;
+      width: 60%;
+      top: 13%;
+    }
+    @include respond(phone) {
+      width: 80%;
+    }
+  }
+  &__text {
+    padding: 0rem .4rem;
+    color: white;
+    font-family: $roboto;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: capitalize;
+    line-height: 1.5;
+    letter-spacing: .1rem;
+    @include respond(tab-land) {
+      font-size: 2.1rem;
+    }
+    @include respond(tab-port) {
+      font-size: 2.3rem;
+      padding: 0rem 1rem;
+    }
+    @include respond(phone) {
+      padding: 0rem .5rem;
+    }
+  }
+  &__wrapper {
+    position: relative;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    left: 40%;
+    height: 93%;
+    width: 50%;
+    border-radius: .5rem;
+    border: .3rem solid $navy-light;
+    @include respond(tab-port) {
+      top: 51%;
+      left: 50%;
+      width: 90%;
+    }
+  }
+}
