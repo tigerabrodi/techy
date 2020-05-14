@@ -1,0 +1,9 @@
+<div
+class="alert"
+[ngClass]="{
+            'alert--success': alert.type === 'success',
+            'alert--danger': alert.type === 'danger'
+          }"
+*ngFor="let alert of alerts">
+{{alert.message}}
+</div>

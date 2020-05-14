@@ -1,0 +1,31 @@
+@import "../../../styles.scss";
+
+.alert {
+  font-family: $roboto;
+  font-weight: 400;
+  font-size: 2rem;
+  text-align: center;
+  width: 80vw;
+  height: 3vh;
+  border-radius: .2rem;
+  box-shadow: 0rem .1rem .3rem black;
+  position: relative;
+  letter-spacing: .2rem;
+  color: $slate-light;
+  margin: 1.5rem 0rem;
+  text-shadow: 0rem .1rem .3rem black;
+  left: 50%;
+  transform: translateX(-50%);
+  &--success {
+    background-color: $navy;
+    border: .2rem solid $navy-light;
+  }
+  &--danger {
+    background-color: $pink;
+    border: .3rem solid $pink-light;
+  }
+  @include respond(phone) {
+    letter-spacing: 0rem;
+    font-size: 1.8rem;
+  }
+}
