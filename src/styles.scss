@@ -23,7 +23,8 @@ $slate-dark: #274059;
 
 // fonts
 $oxanium: 'Oxanium', cursive;
-$robot: 'Roboto', sans-serif;
+$roboto: 'Roboto', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
 
 
 // Mixins
@@ -76,4 +77,5 @@ html {
 body {
     box-sizing: border-box;
     font-weight: 400;
+    background-color: $navy;
 }

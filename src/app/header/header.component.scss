@@ -1,0 +1,214 @@
+@import "../../styles.scss";
+
+.nav {
+  height: 7vh;
+  position: sticky;
+  top: 0%;
+  width: 100vw;
+  background-color: $navy-light;
+  box-shadow: 0rem .2rem .3rem black;
+  &__wrapper {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include respond(tab-port) {
+      width: 90%;
+    }
+  }
+  &__brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-decoration: none;
+    transition: all 0.2s;
+    &__title {
+      margin-left: 1rem;
+      font-family: $roboto;
+      font-size: 2rem;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 0.2rem;
+      @include respond(tab-land) {
+        font-size: 2.2rem;
+      }
+      @include respond(tab-port) {
+        font-size: 2.5rem;
+      }
+    }
+    &:hover .nav__brand__title {
+      opacity: 0.7;
+    }
+  }
+  &__icon {
+    height: 4vh;
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    @include respond(phone) {
+      position: absolute;
+      flex-direction: column;
+      align-items: center;
+      height: 34rem;
+      width: 25rem;
+      visibility: hidden;
+      transform: translate(-50%, -55%);
+      top: 390%;
+      left: 70%;
+      border-radius: 0.2rem;
+      background-color: $navy-light;
+      border: 0.3rem solid $pink;
+      transition: all 0.2s;
+    }
+  }
+
+  &__link,
+  &,
+  &:link,
+  &:visited,
+  &:focus,
+  &:active {
+    font-family: $oxanium;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: $slate-light;
+    transition: all 0.2s;
+    &:not(:last-child) {
+      margin-right: 2rem;
+      @include respond(phone) {
+        margin-right: 0rem;
+      }
+    }
+    &:hover {
+      color: white;
+    }
+    @include respond(tab-land) {
+      font-size: 1.7rem;
+    }
+    @include respond(tab-port) {
+      font-size: 1.9rem;
+    }
+  }
+
+  &__link--auth {
+    text-transform: uppercase;
+    font-family: $montserrat;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 0.2rem;
+    background: linear-gradient(to right, $pink, $pink-orange);
+    padding: 1rem 1rem;
+    transition: all 0.2s;
+    &:hover {
+      background: linear-gradient(to right, $blue, $blue-light);
+    }
+    @include respond(tab-land) {
+      font-size: 1.7rem;
+    }
+    @include respond(tab-port) {
+      padding: 1.2rem 1.3rem;
+      font-size: 1.9rem;
+    }
+    @include respond(phone) {
+      background: transparent;
+      color: $slate-light;
+      font-weight: 400;
+      font-family: $oxanium;
+      padding: 0rem;
+      border-radius: 0rem;
+      text-decoration: none;
+      text-transform: capitalize;
+      &:hover {
+        background: transparent;
+      }
+    }
+    &--span {
+      font-weight: 700;
+      font-size: 1.5rem;
+      &::before {
+        content:" • ";
+      }
+      @include respond(tab-port) {
+        font-size: 1.7rem;
+      }
+    }
+  }
+
+  &__checkbox {
+    visibility: hidden;
+    display: none;
+  }
+
+  &__hamburger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 52%;
+    visibility: hidden;
+    cursor: pointer;
+    &:hover .nav__line {
+      background-color: $slate-light;
+      &--2 {
+        transition: all 0.1s;
+      }
+    }
+    @include respond(phone) {
+      visibility: visible;
+    }
+  }
+
+  &__line {
+    height: 0.4rem;
+    width: 3rem;
+    background-color: white;
+    transition: all 0.3s;
+    &--2 {
+      transition: all 0s;
+    }
+  }
+}
+
+.nav__checkbox:checked ~ .nav__hamburger .nav__line {
+  background-color: $pink;
+  height: 0.5rem;
+}
+
+.nav__checkbox:checked ~ .nav__hamburger .nav__line--1 {
+  transform: rotate(45deg);
+  position: relative;
+  top: 35%;
+}
+
+.nav__checkbox:checked ~ .nav__hamburger .nav__line--2 {
+  visibility: hidden;
+}
+
+.nav__checkbox:checked ~ .nav__hamburger .nav__line--3 {
+  transform: rotate(-45deg);
+  position: relative;
+  bottom: 32%;
+}
+
+.nav__checkbox:checked ~ .nav__header {
+  transform: translate(-50%, -50%);
+  visibility: visible;
+}
+
+.nav__link {
+  @include respond(phone) {
+    opacity: 0 !important;
+  }
+}
+
+.nav__checkbox:checked ~ .nav__header .nav__link {
+  opacity: 1 !important;
+}
