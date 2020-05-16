@@ -1,3 +1,143 @@
+@import "../../styles.scss";
+
 .auth {
-  height: 48vh;
+  height: 45vh;
+  &__form {
+    height: 90%;
+    width: 60%;
+    position: relative;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    @include respond(tab-port) {
+      left: 50%;
+      width: 80%;
+    }
+    @include respond(phone) {
+      height: 95%;
+    }
+  }
+  &__group {
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    width: 80%;
+    justify-content: space-evenly;
+    @include respond(tab-port) {
+      width: 90%;
+    }
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
+
+  &__label {
+    color: $slate-light;
+    font-family: $oxanium;
+    font-size: 1.5rem;
+    @include respond(tab-port) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__input {
+    width: 60%;
+    height: 50%;
+    border-radius: 0.3rem;
+    padding-left: 1.5rem;
+    outline: none;
+    border: none;
+    font-family: $oxanium;
+    @include respond(tab-port) {
+      width: 80%;
+    }
+    &:focus {
+      outline: none;
+      border: 0.2rem solid $blue;
+    }
+    &::placeholder {
+      font-family: $oxanium;
+    }
+  }
+
+  &__button {
+    font-family: $roboto;
+    text-transform: uppercase;
+    color: white;
+    padding: 1.3rem 2rem;
+    background: linear-gradient(to right, $pink, $pink-orange);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    @include respond(tab-port) {
+      padding: 1.5rem 2.3rem;
+    }
+    &:disabled {
+      opacity: 0.3;
+      cursor: auto;
+      &:hover {
+        background: linear-gradient(to right, $pink, $pink-orange);
+      }
+    }
+    &:hover {
+      background: linear-gradient(to right, $blue-dark, $blue-light);
+    }
+  }
+
+  &__switch,
+  &,
+  &:link,
+  &:visited {
+    font-family: $roboto;
+    font-size: 1.5rem;
+    color: $slate-light;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: capitalize;
+    @include respond(tab-port) {
+      font-size: 1.7rem;
+    }
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.fa-arrow-right {
+  transition: all 0.2s;
+}
+
+.auth__button:hover .fa-arrow-right {
+  padding-left: 0.5rem;
+}
+
+.auth__button:disabled:hover .fa-arrow-right {
+  padding-left: 0rem;
+}
+
+.border-red {
+  border: 0.2rem solid red !important;
+}
+
+.border-dark-red {
+  border: 0.2rem solid rgb(151, 17, 17) !important;
+}
+
+.border-green {
+  border: 0.2rem solid green !important;
+}
+
+.input-error {
+  color: red;
+  font-family: $montserrat;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  @include respond(tab-port) {
+    font-size: 1.2rem;
+  }
 }

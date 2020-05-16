@@ -1,5 +1,79 @@
-<section class="auth">
-  
+<app-spinner *ngIf="isLoading"></app-spinner>
+<section class="auth" *ngIf="!isLoading">
+  <app-alert></app-alert>
+  <form class="auth__form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div class="auth__group">
+      <label for="email" class="auth__label">E-Mail</label>
+      <input
+        type="email"
+        class="auth__input"
+        formControlName="email"
+        required
+        email
+        placeholder="Enter Email"
+        [ngClass]="{
+          'border-red': (f.email.invalid && f.email.touched) || f.email.dirty,
+          'border-green': f.email.valid
+        }"
+      />
+      <small
+        class="input-error"
+        *ngIf="f.email.invalid && f.email.touched && !f.email.errors?.required"
+        >E-Mail is invalid</small
+      >
+      <small
+        class="input-error"
+        *ngIf="f.email.errors?.required && f.email.touched"
+        >E-Mail is required</small
+      >
+    </div>
+    <div class="auth__group">
+      <label for="password" class="auth__label">Password</label>
+      <input
+        type="password"
+        class="auth__input"
+        placeholder="Enter Password"
+        formControlName="password"
+        required
+        minlength="6"
+        [ngClass]="{
+          'border-red': f.password.invalid && f.password.touched,
+          'border-dark-red': f.password.invalid && f.password.dirty,
+          'border-green': f.password.valid
+        }"
+      />
+      <small
+        class="input-error"
+        *ngIf="f.password.errors?.required && f.password.touched"
+        >Password is required.
+        </small>
+      <small
+        class="input-error"
+        *ngIf="f.password.errors?.minlength && f.password.touched && !f.password.errors?.required"
+        >Password must be at least 6 characters long.
+      </small>
+    </div>
+    <div class="auth__group" *ngIf="!loginMode">
+      <label for="password2" class="auth__label">Confirm Password</label>
+      <input
+        type="password"
+        class="auth__input"
+        formControlName="password2"
+        required
+        placeholder="Confirm Password"
+        [ngClass]="{
+          'border-red': f.password.value !== f.password2.value,
+          'border-green': f.password.value === f.password2.value && f.password2.dirty && !f.password2.errors?.required
+        }"
+      />
+    </div>
+    <button
+      type="submit"
+      class="auth__button"
+      [disabled]="authForm.invalid"
+    >
+      {{ loginMode ? "Sign In" : "Sign Up" }} <i class="fas fa-arrow-right"></i>
+    </button>
+    <a class="auth__switch" (click)="onSwitchAuth($event)">{{ loginMode ? "Don't have an account yet? Sign Up!" : "Already have an account? Sign In!" }}</a>
+  </form>
 </section>
-
-
