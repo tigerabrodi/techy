@@ -25,16 +25,17 @@ export class AuthService {
     private uiService: UiService,
     private afs: AngularFirestore
   ) {
-    // current user id
+    // current users unique id
     this.auth.currentUser
       .then((user) => {
         this.userId = user.uid;
       })
       .catch((err) => console.log(err.message));
 
+    // users collection
     this.usersCollection = this.afs.collection<User>('users');
   }
-
+  // Function which fires in the app component to check if the user is authenticated
   initAuthListener() {
     this.auth.authState.subscribe((user) => {
       if (user) {
@@ -48,17 +49,15 @@ export class AuthService {
     });
   }
 
-  // setTimeout is used to prevent the user from seeing the auth page after succeded by keep loading a while.
+  // register user
   registerUser(authData: AuthData) {
     this.uiService.loadingStateChanged.next(true);
     this.auth
       .createUserWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
         this.router.navigate(['/profile/new']);
-        this.usersCollection.doc(result.user.uid).set(null);
-        setTimeout(() => {
-          this.uiService.loadingStateChanged.next(false);
-        }, 300);
+        this.usersCollection.doc<User>(result.user.uid).set({});
+        this.uiService.loadingStateChanged.next(false);
       })
       .catch((error) => {
         this.uiService.loadingStateChanged.next(false);
@@ -66,14 +65,13 @@ export class AuthService {
       });
   }
 
+  // login user
   login(authData: AuthData) {
     this.uiService.loadingStateChanged.next(true);
     this.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
-        setTimeout(() => {
-          this.uiService.loadingStateChanged.next(false);
-        }, 300);
+        this.uiService.loadingStateChanged.next(false);
       })
       .catch((error) => {
         this.uiService.loadingStateChanged.next(false);
@@ -81,10 +79,12 @@ export class AuthService {
       });
   }
 
+  // Logout user
   logout() {
     this.auth.signOut();
   }
 
+  // Return a boolean if the user is authenticated
   isAuth() {
     return this.isAuthenticated;
   }

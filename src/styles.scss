@@ -73,4 +73,11 @@ body {
   font-weight: 400;
   background-color: $navy;
   overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: .5rem;
+    background-color: $slate;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $slate-light;
+  }
 }

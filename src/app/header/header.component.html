@@ -16,7 +16,7 @@
     <div class="nav__header">
       <a routerLink="/developers" class="nav__link">Developers</a>
       <a routerLink="/" class="nav__link">Posts</a>
-      <a routerLink="/auth" class="nav__link nav__link--auth">Sign In<span class="nav__link--auth--span"></span>Up</a>
+      <a *ngIf="!isAuth" routerLink="/auth" class="nav__link nav__link--auth">Sign In<span class="nav__link--auth--span"></span>Up</a>
     </div>
   </div>
 </nav>

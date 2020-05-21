@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -29,7 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onClick() {
-    let check = document.getElementsByClassName(
+    const check = document.getElementsByClassName(
       'checkbox'
     )[0] as HTMLInputElement;
     check.checked = false;

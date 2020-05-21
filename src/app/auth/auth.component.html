@@ -46,10 +46,14 @@
         class="input-error"
         *ngIf="f.password.errors?.required && f.password.touched"
         >Password is required.
-        </small>
+      </small>
       <small
         class="input-error"
-        *ngIf="f.password.errors?.minlength && f.password.touched && !f.password.errors?.required"
+        *ngIf="
+          f.password.errors?.minlength &&
+          f.password.touched &&
+          !f.password.errors?.required
+        "
         >Password must be at least 6 characters long.
       </small>
     </div>
@@ -63,17 +67,20 @@
         placeholder="Confirm Password"
         [ngClass]="{
           'border-red': f.password.value !== f.password2.value,
-          'border-green': f.password.value === f.password2.value && f.password2.dirty && !f.password2.errors?.required
+          'border-green':
+            f.password.value === f.password2.value &&
+            f.password2.dirty &&
+            !f.password2.errors?.required
         }"
       />
     </div>
-    <button
-      type="submit"
-      class="auth__button"
-      [disabled]="authForm.invalid"
-    >
-      {{ loginMode ? "Sign In" : "Sign Up" }} <i class="fas fa-arrow-right"></i>
+    <button type="submit" class="auth__button" [disabled]="authForm.invalid">
+      {{ loginMode ? 'Sign In' : 'Sign Up' }} <i class="fas fa-arrow-right"></i>
     </button>
-    <a class="auth__switch" (click)="onSwitchAuth($event)">{{ loginMode ? "Don't have an account yet? Sign Up!" : "Already have an account? Sign In!" }}</a>
+    <a class="auth__switch" (click)="onSwitchAuth($event)">{{
+      loginMode
+        ? "Don't have an account yet? Sign Up!"
+        : 'Already have an account? Sign In!'
+    }}</a>
   </form>
 </section>

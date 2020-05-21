@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Alert } from '../models/alert.model';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,12 +7,10 @@ import { v4 as uuidv4 } from 'uuid';
   providedIn: 'root',
 })
 export class UiService {
-  loadingStateChanged = new Subject<boolean>();
+  loadingStateChanged = new BehaviorSubject<boolean>(false);
 
-  alertsChanged = new Subject<Alert[]>();
+  alertsChanged = new BehaviorSubject<Alert[]>([]);
   private alerts: Alert[] = [];
-
-  constructor() {}
 
   alertAction(message: string, type: string) {
     const id = uuidv4();

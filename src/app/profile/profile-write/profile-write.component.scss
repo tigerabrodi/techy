@@ -1,0 +1,49 @@
+@import "../../../styles.scss";
+
+.write {
+  height: 170vh;
+}
+
+.wrapper {
+  height: 15%;
+  background-color: $navy-light;
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    height: 80%;
+    width: 50%;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: .1rem solid white;
+  }
+
+  &__wrapper {
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &__image {
+    height: 90%;
+    width: 25%;
+    border-radius: 50%;
+    background-color: $navy;
+    border: .5rem dashed $navy-light;
+  }
+
+  &__picture {
+    height: 95%;
+    width: 90%;
+  }
+}
+
+.form {
+  height: 85%;
+  background-color: $navy;
+}
