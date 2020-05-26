@@ -1,12 +1,15 @@
-@import "../../../styles.scss";
+@import '../../../styles.scss';
 
+// the complete section in a form tag
 .write {
   height: 170vh;
 }
 
+// upper part of the section
 .wrapper {
   height: 15%;
   background-color: $navy-light;
+  // wrapper for upper part
   &__box {
     display: flex;
     align-items: center;
@@ -17,11 +20,12 @@
     left: 40%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border: .1rem solid white;
+    border: 0.1rem solid white;
   }
 
+  // wrapper around the text part
   &__wrapper {
-    height: 90%;
+    height: 60%;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -29,18 +33,53 @@
     justify-content: space-around;
   }
 
+  &__title {
+    font-family: $roboto;
+    font-size: 2rem;
+    color: $slate-light;
+    text-align: center;
+  }
+
+  &__subtitle {
+    font-family: $oxanium;
+    font-size: 1.5rem;
+    color: $slate-light;
+    text-align: center;
+  }
+
+  // wrapper for the image
   &__image {
     height: 90%;
     width: 25%;
     border-radius: 50%;
     background-color: $navy;
-    border: .5rem dashed $navy-light;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 0.5rem dashed $navy-light;
   }
 
-  &__picture {
-    height: 95%;
-    width: 90%;
+  // label & also the image
+  &__label {
+    height: 98%;
+    width: 95%;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    border: .1rem solid white;
+    &--img {
+      border-radius: 50%;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      background-position: center;
+      background-size: cover;
+    }
   }
+}
+
+input[type='file'] {
+  visibility: hidden;
 }
 
 .form {

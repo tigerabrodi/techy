@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription, Observable, Timestamp } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {
   AngularFirestore,
@@ -12,6 +13,7 @@ import { UiService } from 'src/app/shared/ui.service';
 import { ProfileService } from '../profile.service';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { UploadTaskSnapshot } from '@angular/fire/storage/interfaces';
 
 @Component({
   selector: 'app-profile-write',
@@ -24,8 +26,8 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
 
   private profileDoc: AngularFirestoreDocument<Profile>;
   profile: Observable<Profile>;
-  profileImageObs: Observable<string | null>;
-  profileImagePath: string | null = '';
+  profileImageObs: Observable<string>;
+  uploadPercent: Observable<number>;
 
   profileForm = this.fb.group({});
   profileId: string;
@@ -34,7 +36,7 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription;
   imageSubscription: Subscription;
   profileSubscription: Subscription;
-  loadingSusbcription: Subscription;
+  loadingSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -44,16 +46,7 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
     private uiService: UiService,
     private profileService: ProfileService,
     private auth: AngularFireAuth
-  ) {
-    // Get current users unique id
-    this.auth.currentUser
-      .then((user) => {
-        this.userId = user.uid;
-      })
-      .catch((err) => {
-        console.log('User id not defined', err);
-      });
-  }
+  ) {}
 
   ngOnInit(): void {
     // Check if profile Id exists to determine if the user is editing or creating the profile
@@ -67,30 +60,26 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
         this.profileImageObs = ref.getDownloadURL();
         this.editMode = true;
         console.log(this.editMode);
-        this.imageSubscription = this.profileImageObs.subscribe((path) => {
-          this.profileImagePath = path;
-          this.profileSubscription = this.profile.subscribe((profile) => {
-            this.profileForm = this.fb.group({
-              name: [profile.name, Validators.required],
-              image: [this.profileImagePath],
-              email: [profile.email, Validators.email],
-              stackoverflow: [profile.stackoverflow],
-              github: [profile.github],
-              description: [profile.description],
-              website: [profile.website],
-              location: [profile.location, Validators.required],
-              profession: [profile.profession],
-              joined: [profile.joined],
-              twitter: [profile.twitter],
-            });
+        this.profileSubscription = this.profile.subscribe((profile) => {
+          this.profileForm = this.fb.group({
+            name: [profile.name, Validators.required],
+            email: [profile.email, Validators.email],
+            stackoverflow: [profile.stackoverflow],
+            github: [profile.github],
+            description: [profile.description],
+            website: [profile.website],
+            location: [profile.location, Validators.required],
+            profession: [profile.profession],
+            joined: [profile.joined],
+            twitter: [profile.twitter],
           });
         });
       } else {
         // Profile gets created
+        this.profileId = this.afs.createId();
         console.log(this.editMode);
         this.profileForm = this.fb.group({
           name: ['', Validators.required],
-          image: [this.profileImagePath],
           email: ['', Validators.email],
           stackoverflow: [''],
           github: [''],
@@ -105,7 +94,7 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
     });
 
     // Loading state
-    this.loadingSusbcription = this.uiService.loadingStateChanged.subscribe(
+    this.loadingSubscription = this.uiService.loadingStateChanged.subscribe(
       (loading) => {
         this.isLoading = loading;
       }
@@ -123,7 +112,6 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
       // edit profile
       const profile: Profile = {
         name: this.f.name.value,
-        image: this.f.image.value,
         email: this.f.email.value,
         stackoverflow: this.f.stackoverflow.value,
         github: this.f.github.value,
@@ -139,7 +127,6 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
       // create profile
       const profile: Profile = {
         name: this.f.name.value,
-        image: this.f.image.value,
         email: this.f.email.value,
         stackoverflow: this.f.stackoverflow.value,
         github: this.f.github.value,
@@ -150,8 +137,23 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
         joined: firebase.firestore.FieldValue.serverTimestamp(),
         userId: this.userId,
       };
-      this.profileService.saveProfile(profile);
+      this.profileService.saveProfile(profile, this.profileId);
     }
+  }
+
+  // image upload
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = `images/${this.profileId}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    this.uploadPercent = task.percentageChanges();
+
+    task
+      .snapshotChanges()
+      .pipe(finalize(() => (this.profileImageObs = fileRef.getDownloadURL())))
+      .subscribe();
   }
 
   ngOnDestroy() {
@@ -161,11 +163,8 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
     if (this.profileSubscription) {
       return this.profileSubscription.unsubscribe();
     }
-    if (this.imageSubscription) {
-      return this.imageSubscription.unsubscribe();
-    }
-    if (this.loadingSusbcription) {
-      return this.loadingSusbcription.unsubscribe();
+    if (this.loadingSubscription) {
+      return this.loadingSubscription.unsubscribe();
     }
   }
 }

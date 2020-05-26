@@ -2,6 +2,7 @@
 
 .auth {
   height: 45vh;
+  // form
   &__form {
     height: 90%;
     width: 60%;
@@ -21,6 +22,7 @@
       height: 95%;
     }
   }
+  // group for input & labels
   &__group {
     display: flex;
     flex-direction: column;
@@ -89,6 +91,7 @@
     }
   }
 
+  // Link to switch mode register/login
   &__switch,
   &,
   &:link,

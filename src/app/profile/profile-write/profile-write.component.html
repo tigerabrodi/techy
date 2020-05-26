@@ -1,13 +1,24 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
-<form class="write" (ngSubmit)="onSubmit()" [formGroup]="profileForm" *ngIf="!isLoading">
+<form
+  class="write"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="profileForm"
+  *ngIf="!isLoading"
+>
   <div class="wrapper">
     <div class="wrapper__box">
       <div class="wrapper__image">
-        <img [src]="profileImagePath ? profileImagePath : '../../../assets/default-avatar.png'" alt="" class="wrapper__picture">
+        <label
+          for="fileupload"
+          class="wrapper__label"
+        >
+        <img [src]="profileImageObs ? (profileImageObs | async) : '../../../assets/default-avatar.png'" alt="avatar" class="wrapper__label--img">
+        <input type="file" (change)="uploadFile($event)" id="fileupload">
+        </label>
       </div>
       <div class="wrapper__wrapper">
         <h1 class="wrapper__title">
-          {{editMode ? "Editing Profile": "New Profile"}}
+          {{ editMode ? 'Editing Profile' : 'New Profile' }}
         </h1>
         <p class="wrapper__subtitle">
           Click on the avatar to upload a picture
@@ -15,7 +26,5 @@
       </div>
     </div>
   </div>
-  <div class="form">
-
-  </div>
+  <div class="form"></div>
 </form>

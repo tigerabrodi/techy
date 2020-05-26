@@ -6,6 +6,7 @@
     height: 120vh;
     margin-bottom: 30rem;
   }
+  // wrapper for welcome text
   &__box {
     position: relative;
     top: 16.4%;
@@ -27,6 +28,7 @@
       width: 80%;
     }
   }
+  // welcome text
   &__text {
     padding: 0rem .4rem;
     color: white;
@@ -47,6 +49,7 @@
       padding: 0rem .5rem;
     }
   }
+  // wrapper for posts/questions
   &__wrapper {
     position: relative;
     top: 30%;

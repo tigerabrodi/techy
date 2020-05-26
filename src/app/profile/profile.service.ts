@@ -26,7 +26,7 @@ export class ProfileService {
   }
 
   // Save or update the profile, update if profiles id was passed, otherwise create a new profile
-  saveProfile(profile: Profile, profileId?: string) {
+  saveProfile(profile: Profile, profileId: string) {
     if (profileId) {
       // create profile
       this.uiService.loadingStateChanged.next(true);
@@ -41,12 +41,11 @@ export class ProfileService {
     } else {
       // update profile
       this.uiService.loadingStateChanged.next(true);
-      const id = this.afs.createId();
       this.profilesCollection
-        .doc(id)
+        .doc(profileId)
         .set(profile)
         .then(() => {
-          this.router.navigate([`profile/:${id}`]);
+          this.router.navigate([`profile/:${profileId}`]);
           this.uiService.loadingStateChanged.next(false);
         })
         .catch((err) => console.log(err));
