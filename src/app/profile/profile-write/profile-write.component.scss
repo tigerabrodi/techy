@@ -2,12 +2,12 @@
 
 // the complete section in a form tag
 .write {
-  height: 170vh;
+  height: 200vh;
 }
 
 // upper part of the section
 .wrapper {
-  height: 15%;
+  height: 13%;
   background-color: $navy-light;
   // wrapper for upper part
   &__box {
@@ -21,6 +21,13 @@
     top: 50%;
     transform: translate(-50%, -50%);
     border: 0.1rem solid white;
+    @include respond(tab-land) {
+      width: 70%;
+      left: 50%;
+    }
+    @include respond(tab-port) {
+      width: 90%;
+    }
   }
 
   // wrapper around the text part
@@ -57,6 +64,14 @@
     justify-content: space-around;
     align-items: center;
     border: 0.5rem dashed $navy-light;
+    transition: all 0.3s;
+    &:hover {
+      border: 0.5rem solid white;
+    }
+    @include respond(phone) {
+      height: 98%;
+      width: 45%;
+    }
   }
 
   // label & also the image
@@ -66,7 +81,6 @@
     border-radius: 50%;
     position: relative;
     cursor: pointer;
-    border: .1rem solid white;
     &--img {
       border-radius: 50%;
       position: relative;
@@ -83,6 +97,93 @@ input[type='file'] {
 }
 
 .form {
-  height: 85%;
+  height: 87%;
   background-color: $navy;
+
+  &__wrapper {
+    height: 100%;
+    width: 50%;
+    position: relative;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-around;
+    @include respond(tab-land) {
+      width: 70%;
+      left: 50%;
+    }
+    @include respond(tab-port) {
+      width: 90%;
+    }
+  }
+
+  &__group {
+    height: 8%;
+    width: 100%;
+    border: 0.1rem solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+
+  &__label {
+    font-family: $roboto;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    margin-left: 1rem;
+  }
+
+  &__input {
+    width: 70%;
+    height: 35%;
+    outline: none;
+    margin-left: 1rem;
+    border: none;
+    box-shadow: 0rem 0rem 0.4rem black;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    color: $navy;
+    font-family: $oxanium;
+    font-size: 1.8rem;
+    padding-left: 1rem;
+    &::placeholder {
+      font-family: $oxanium;
+      color: $navy;
+      font-size: 1.8rem;
+    }
+    &:focus {
+      border: 0.2rem solid $blue;
+    }
+  }
+
+  &__button {
+    font-family: $montserrat;
+    font-size: 1.7rem;
+    padding: 1.3rem 2.6rem;
+    background: linear-gradient(to right, $pink, $pink-orange);
+    color: white;
+    outline: none;
+    border: none;
+    box-shadow: 0rem 0rem 0.3rem black;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      animation: scaleInOut 0.8s infinite;
+    }
+  }
+}
+
+.input-error {
+  color: red;
+  font-family: $montserrat;
+  font-size: 1.3rem;
+  margin-left: 1rem;
+  @include respond(tab-port) {
+    font-size: 1.2rem;
+  }
 }

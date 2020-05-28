@@ -18,9 +18,9 @@ $slate: #385c80;
 $slate-dark: #274059;
 
 // fonts
-$oxanium: "Oxanium", cursive;
-$roboto: "Roboto", sans-serif;
-$montserrat: "Montserrat", sans-serif;
+$oxanium: 'Oxanium', cursive;
+$roboto: 'Roboto', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
 
 // Mixins
 @mixin respond($breakpoint) {
@@ -74,10 +74,23 @@ body {
   background-color: $navy;
   overflow-x: hidden;
   &::-webkit-scrollbar {
-    width: .5rem;
+    width: 0.5rem;
     background-color: $slate;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $slate-light;
+  }
+}
+
+@keyframes scaleInOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0rem .5rem .5rem black;
+  }
+  100% {
+    transform: scale(1);
   }
 }

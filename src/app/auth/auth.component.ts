@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { UiService } from '../shared/ui.service';
 import { AuthService } from './auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',

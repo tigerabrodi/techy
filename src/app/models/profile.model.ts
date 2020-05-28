@@ -1,5 +1,5 @@
 export interface Profile {
-  userId: string | null;
+  userId?: string | null;
   name: string;
   description: string;
   stackoverflow?: string;
@@ -7,7 +7,7 @@ export interface Profile {
   website?: string;
   location: string;
   profession: string;
-  joined: any;
+  joined?: any;
   twitter?: string;
   email?: string;
 }

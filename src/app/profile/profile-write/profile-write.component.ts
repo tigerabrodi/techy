@@ -22,12 +22,11 @@ import { UploadTaskSnapshot } from '@angular/fire/storage/interfaces';
 })
 export class ProfileWriteComponent implements OnInit, OnDestroy {
   editMode = false;
-  isLoading = false;
+  isLoading = true;
 
   private profileDoc: AngularFirestoreDocument<Profile>;
   profile: Observable<Profile>;
   profileImageObs: Observable<string>;
-  uploadPercent: Observable<number>;
 
   profileForm = this.fb.group({});
   profileId: string;
@@ -52,10 +51,10 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
     // Check if profile Id exists to determine if the user is editing or creating the profile
     this.routeSubscription = this.route.params.subscribe((params) => {
       this.profileId = params['profileId'];
-      this.profileDoc = this.afs.doc<Profile>(`profiles/${this.profileId}`);
-      this.profile = this.profileDoc.valueChanges();
       if (this.profileId) {
         // Profile exists already > update
+        this.profileDoc = this.afs.doc<Profile>(`profiles/${this.profileId}`);
+        this.profile = this.profileDoc.valueChanges();
         const ref = this.storage.ref(`images/${this.profileId}`);
         this.profileImageObs = ref.getDownloadURL();
         this.editMode = true;
@@ -83,7 +82,7 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
           email: ['', Validators.email],
           stackoverflow: [''],
           github: [''],
-          description: [''],
+          description: ['', Validators.required],
           website: [''],
           location: ['', Validators.required],
           profession: [''],
@@ -119,10 +118,9 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
         website: this.f.website.value,
         location: this.f.location.value,
         profession: this.f.profession.value,
-        joined: firebase.firestore.FieldValue.serverTimestamp(),
-        userId: this.userId,
+        twitter: this.f.twitter.value,
       };
-      this.profileService.saveProfile(profile, this.profileId);
+      this.profileService.saveProfile(profile, this.profileId, true);
     } else {
       // create profile
       const profile: Profile = {
@@ -132,6 +130,7 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
         github: this.f.github.value,
         description: this.f.description.value,
         website: this.f.website.value,
+        twitter: this.f.twitter.value,
         location: this.f.location.value,
         profession: this.f.profession.value,
         joined: firebase.firestore.FieldValue.serverTimestamp(),
@@ -147,8 +146,6 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
     const filePath = `images/${this.profileId}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-
-    this.uploadPercent = task.percentageChanges();
 
     task
       .snapshotChanges()

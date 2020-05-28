@@ -25,7 +25,7 @@ export class AuthService {
     private uiService: UiService,
     private afs: AngularFirestore
   ) {
-    // current users unique id
+    // current logged in users unique id
     this.auth.currentUser
       .then((user) => {
         this.userId = user.uid;
@@ -57,7 +57,9 @@ export class AuthService {
       .then((result) => {
         this.router.navigate(['/profile/new']);
         this.usersCollection.doc<User>(result.user.uid).set({});
-        this.uiService.loadingStateChanged.next(false);
+        setTimeout(() => {
+          this.uiService.loadingStateChanged.next(false);
+        }, 1000);
       })
       .catch((error) => {
         this.uiService.loadingStateChanged.next(false);
@@ -71,7 +73,9 @@ export class AuthService {
     this.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
-        this.uiService.loadingStateChanged.next(false);
+        setTimeout(() => {
+          this.uiService.loadingStateChanged.next(false);
+        }, 1000);
       })
       .catch((error) => {
         this.uiService.loadingStateChanged.next(false);
@@ -87,5 +91,15 @@ export class AuthService {
   // Return a boolean if the user is authenticated
   isAuth() {
     return this.isAuthenticated;
+  }
+
+  // Update user to have name and profileId
+  updateCurrentUser(name: string, profileId: string) {
+    const currentUserRef = this.usersCollection.doc(this.userId);
+
+    currentUserRef.set({
+      name,
+      profileId,
+    });
   }
 }

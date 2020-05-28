@@ -8,12 +8,17 @@
   <div class="wrapper">
     <div class="wrapper__box">
       <div class="wrapper__image">
-        <label
-          for="fileupload"
-          class="wrapper__label"
-        >
-        <img [src]="profileImageObs ? (profileImageObs | async) : '../../../assets/default-avatar.png'" alt="avatar" class="wrapper__label--img">
-        <input type="file" (change)="uploadFile($event)" id="fileupload">
+        <label for="fileupload" class="wrapper__label">
+          <img
+            [src]="
+              profileImageObs
+                ? (profileImageObs | async)
+                : '../../../assets/default-avatar.png'
+            "
+            alt=""
+            class="wrapper__label--img"
+          />
+          <input type="file" (change)="uploadFile($event)" id="fileupload" />
         </label>
       </div>
       <div class="wrapper__wrapper">
@@ -26,5 +31,96 @@
       </div>
     </div>
   </div>
-  <div class="form"></div>
+  <div class="form">
+    <div class="form__wrapper">
+      <div class="form__group">
+        <label for="name" class="form__label">Name *</label>
+        <input
+          placeholder="Enter Name"
+          type="text"
+          formControlName="name"
+          class="form__input"
+        />
+        <small class="input-error" *ngIf="f.name.touched && f.name.errors?.required">Name is required</small>
+      </div>
+      <div class="form__group">
+        <label for="description" class="form__label">Description *</label>
+        <input
+          placeholder="Enter Description"
+          type="text"
+          formControlName="description"
+          class="form__input"
+        />
+        <small class="input-error" *ngIf="f.description.errors?.required && f.description.touched">Description is required</small>
+      </div>
+      <div class="form__group">
+        <label for="email" class="form__label">Public Email</label>
+        <input
+          placeholder="Enter Email"
+          type="email"
+          formControlName="email"
+          class="form__input"
+        />
+      </div>
+      <div class="form__group">
+        <label for="location" class="form__label">Location *</label>
+        <input
+          placeholder="Enter Location"
+          type="text"
+          formControlName="location"
+          class="form__input"
+        />
+        <small class="input-error" *ngIf="f.location.touched && f.location.errors?.required">Location is required</small>
+      </div>
+      <div class="form__group">
+        <label for="website" class="form__label">Website</label>
+        <input
+          placeholder="Enter Website"
+          type="text"
+          formControlName="website"
+          class="form__input"
+        />
+      </div>
+      <div class="form__group">
+        <label for="profession" class="form__label">Profession / Role</label>
+        <input
+          type="text"
+          placeholder="Enter Profession or Role"
+          formControlName="profession"
+          class="form__input"
+        />
+      </div>
+      <div class="form__group">
+        <label for="github" class="form__label">Github</label>
+        <input
+          placeholder="Enter Github"
+          type="text"
+          formControlName="github"
+          class="form__input"
+        />
+      </div>
+      <div class="form__group">
+        <label for="stackoverflow" class="form__label">Stackoverflow</label>
+        <input
+          type="text"
+          placeholder="Enter Stackoverflow"
+          formControlName="stackoverflow"
+          class="form__input"
+        />
+      </div>
+      <div class="form__group">
+        <label for="twitter" class="form__label">Twitter</label>
+        <input
+          type="text"
+          placeholder="Enter Twitter"
+          formControlName="twitter"
+          class="form__input"
+        />
+      </div>
+
+      <button type="submit" class="form__button">
+        {{ editMode ? 'Edit Profile' : 'Save Profile' }}
+      </button>
+    </div>
+  </div>
 </form>
