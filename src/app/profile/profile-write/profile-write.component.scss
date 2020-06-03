@@ -159,6 +159,14 @@ input[type='file'] {
     &:focus {
       border: 0.2rem solid $blue;
     }
+    &--textarea {
+      height: 50%;
+      &::placeholder {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
   }
 
   &__button {

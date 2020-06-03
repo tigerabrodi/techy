@@ -43,14 +43,14 @@
         />
         <small class="input-error" *ngIf="f.name.touched && f.name.errors?.required">Name is required</small>
       </div>
-      <div class="form__group">
+      <div class="form__group form__group--textarea">
         <label for="description" class="form__label">Description *</label>
-        <input
+        <textarea
           placeholder="Enter Description"
           type="text"
           formControlName="description"
-          class="form__input"
-        />
+          class="form__input form__input--textarea"
+        ></textarea>
         <small class="input-error" *ngIf="f.description.errors?.required && f.description.touched">Description is required</small>
       </div>
       <div class="form__group">

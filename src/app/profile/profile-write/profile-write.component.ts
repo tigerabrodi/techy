@@ -13,7 +13,6 @@ import { UiService } from 'src/app/shared/ui.service';
 import { ProfileService } from '../profile.service';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { UploadTaskSnapshot } from '@angular/fire/storage/interfaces';
 
 @Component({
   selector: 'app-profile-write',
@@ -33,7 +32,6 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
   userId: string | null;
 
   routeSubscription: Subscription;
-  imageSubscription: Subscription;
   profileSubscription: Subscription;
   loadingSubscription: Subscription;
 
@@ -98,6 +96,14 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
         this.isLoading = loading;
       }
     );
+
+    // Get current user id
+    this.auth.currentUser
+      .then((user) => {
+        this.userId = user.uid;
+        console.log(user.uid);
+      })
+      .catch((err) => console.log(err));
   }
 
   // access the controls

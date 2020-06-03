@@ -31,25 +31,29 @@ export class ProfileService {
   saveProfile(profile: Profile, profileId: string, editMode?: boolean) {
     this.authService.updateCurrentUser(profile.name, profileId);
     if (editMode) {
-      // create profile
+      // update profile
       this.uiService.loadingStateChanged.next(true);
       this.profileDoc = this.afs.doc(`profiles/${profileId}`);
       this.profileDoc
         .update(profile)
         .then(() => {
           this.router.navigate([`/profile/:${profileId}`]);
-          this.uiService.loadingStateChanged.next(false);
+          setTimeout(() => {
+            this.uiService.loadingStateChanged.next(false);
+          }, 1000);
         })
         .catch((err) => console.log(err));
     } else {
-      // update profile
+      // create profile
       this.uiService.loadingStateChanged.next(true);
       this.profilesCollection
         .doc(profileId)
         .set(profile)
         .then(() => {
           this.router.navigate([`profile/:${profileId}`]);
-          this.uiService.loadingStateChanged.next(false);
+          setTimeout(() => {
+            this.uiService.loadingStateChanged.next(false);
+          }, 1000);
         })
         .catch((err) => console.log(err));
     }

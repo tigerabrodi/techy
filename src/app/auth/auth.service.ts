@@ -35,6 +35,7 @@ export class AuthService {
     // users collection
     this.usersCollection = this.afs.collection<User>('users');
   }
+
   // Function which fires in the app component to check if the user is authenticated
   initAuthListener() {
     this.auth.authState.subscribe((user) => {
@@ -42,6 +43,7 @@ export class AuthService {
         this.authChange.next(true);
         this.isAuthenticated = true;
         this.userId = user.uid;
+        console.log(this.userId);
       } else {
         this.authChange.next(false);
         this.isAuthenticated = false;
