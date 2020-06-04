@@ -43,7 +43,6 @@ export class AuthService {
         this.authChange.next(true);
         this.isAuthenticated = true;
         this.userId = user.uid;
-        console.log(this.userId);
       } else {
         this.authChange.next(false);
         this.isAuthenticated = false;

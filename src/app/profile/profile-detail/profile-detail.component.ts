@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Profile } from 'src/app/models/profile.model';
 import { Observable, Subscription } from 'rxjs';
 import { UiService } from 'src/app/shared/ui.service';
-import { ProfileService } from '../profile.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -36,17 +35,14 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     private uiService: UiService,
     private auth: AngularFireAuth
   ) {
-    this.auth.currentUser
-      .then((user) => {
-        this.userId = user.uid;
-      })
-      .catch((err) => console.log(err));
+    this.uiService.loadingStateChanged.next(this.isLoading);
   }
 
   ngOnInit(): void {
     // Get the profile id through params
     this.routeSubscription = this.route.params.subscribe((params) => {
-      this.profileId = params['profileId'];
+      const profileParams = params['profileId'].toString().split(':');
+      this.profileId = profileParams[1];
       this.profileDoc = this.afs.doc<Profile>(`profiles/${this.profileId}`);
       this.profile = this.profileDoc.valueChanges();
       const ref = this.storage.ref(`images/${this.profileId}`);
@@ -54,11 +50,17 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     });
 
     // loading state
-    this.loadingSubscription = this.uiService.loadingStateChanged.subscribe(
-      (loading) => {
-        this.isLoading = loading;
-      }
-    );
+    this.loadingSubscription = this.profileImageObs.subscribe(() => {
+      this.isLoading = false;
+      this.uiService.loadingStateChanged.next(this.isLoading);
+    });
+
+    // Get current users id
+    this.auth.currentUser
+      .then((user) => {
+        this.userId = user.uid;
+      })
+      .catch((err) => console.log(err));
   }
 
   ngOnDestroy() {

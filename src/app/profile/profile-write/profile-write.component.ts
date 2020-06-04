@@ -46,9 +46,11 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.uiService.loadingStateChanged.next(true);
     // Check if profile Id exists to determine if the user is editing or creating the profile
     this.routeSubscription = this.route.params.subscribe((params) => {
-      this.profileId = params['profileId'];
+      const profileParams = params['profileId'].toString().split(':');
+      this.profileId = profileParams[1];
       if (this.profileId) {
         // Profile exists already > update
         this.profileDoc = this.afs.doc<Profile>(`profiles/${this.profileId}`);
@@ -56,8 +58,9 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
         const ref = this.storage.ref(`images/${this.profileId}`);
         this.profileImageObs = ref.getDownloadURL();
         this.editMode = true;
-        console.log(this.editMode);
+
         this.profileSubscription = this.profile.subscribe((profile) => {
+          this.uiService.loadingStateChanged.next(false);
           this.profileForm = this.fb.group({
             name: [profile.name, Validators.required],
             email: [profile.email, Validators.email],
@@ -74,7 +77,7 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
       } else {
         // Profile gets created
         this.profileId = this.afs.createId();
-        console.log(this.editMode);
+        this.uiService.loadingStateChanged.next(false);
         this.profileForm = this.fb.group({
           name: ['', Validators.required],
           email: ['', Validators.email],
@@ -101,7 +104,6 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
     this.auth.currentUser
       .then((user) => {
         this.userId = user.uid;
-        console.log(user.uid);
       })
       .catch((err) => console.log(err));
   }

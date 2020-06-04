@@ -1,1 +1,72 @@
-<p>profile-detail works!</p>
+<app-spinner *ngIf="isLoading"></app-spinner>
+<section class="profile" *ngIf="!isLoading">
+  <div class="detail">
+    <div class="detail__wrapper">
+      <div class="detail__wrapper__image">
+        <img
+          [src]="
+            profileImageObs
+              ? (profileImageObs | async)
+              : '../../../assets/default-avatar.png'
+          "
+          alt=""
+          class="detail__image"
+        />
+      </div>
+      <div class="detail__wrapper__info">
+        <div class="detail__wrapper__name">
+          <h1 class="detail__name">{{ (profile | async)?.name }}</h1>
+          <a routerLink="edit" class="detail__edit"
+            ><i class="fas fa-user-edit"></i
+          ></a>
+        </div>
+        <h3 class="detail__date">
+          Since {{ (profile | async)?.joined.seconds * 1000 | date: 'dd-MM-yyyy' }}
+        </h3>
+        <h3 class="detail__profession" *ngIf="(profile | async)?.profession">
+          {{ (profile | async)?.profession }}
+        </h3>
+        <h3 class="detail__location">{{ (profile | async)?.location }}</h3>
+        <h3 class="detail__description">
+          {{ (profile | async)?.description }}
+        </h3>
+        <div class="detail__wrapper__links">
+          <a
+            target="__blank"
+            [href]="(profile | async)?.stackoverflow"
+            *ngIf="(profile | async)?.stackoverflow"
+            class="detail__link"
+          >
+            <i class="fab fa-stack-overflow detail__link__icon"></i>
+          </a>
+          <a
+            target="__blank"
+            [href]="(profile | async)?.github"
+            *ngIf="(profile | async)?.github"
+            class="detail__link"
+          >
+            <i class="fab fa-github-alt detail__link__icon"></i>
+          </a>
+          <a
+            target="__blank"
+            [href]="(profile | async)?.twitter"
+            *ngIf="(profile | async)?.twitter"
+            class="detail__link"
+          >
+            <i class="fab fa-twitter detail__link__icon"></i>
+          </a>
+          <a
+            target="__blank"
+            [href]="(profile | async)?.website"
+            *ngIf="(profile | async)?.website"
+            class="detail__link"
+          >
+            <i class="fas fa-globe-americas detail__link__icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="posts"></div>
+</section>
