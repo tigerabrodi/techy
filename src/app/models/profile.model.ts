@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 export interface Profile {
   userId?: string | null;
   name: string;
@@ -10,4 +12,6 @@ export interface Profile {
   joined?: any;
   twitter?: string;
   email?: string;
+  id?: string;
+  profileAvatar?: Observable<string>;
 }

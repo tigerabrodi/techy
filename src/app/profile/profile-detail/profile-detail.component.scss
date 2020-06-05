@@ -11,7 +11,7 @@
   &__wrapper {
     height: 90%;
     width: 70%;
-    border: 0.1rem solid white;
+    box-shadow: 0rem 0rem .3rem black;
     position: relative;
     transform: translate(-50%, -50%);
     top: 50%;
@@ -45,7 +45,6 @@
     &__info {
       height: 90%;
       width: 60%;
-      border: 0.1rem solid white;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -55,7 +54,6 @@
     &__name {
       height: 20%;
       width: 100%;
-      border: 0.1rem solid white;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -179,6 +177,7 @@
   padding: 0.5rem;
   border-radius: 0.3rem;
   transition: all 0.3s;
+  border: .2rem solid white;
   @include respond(tab-land) {
     font-size: 2.5rem;
   }

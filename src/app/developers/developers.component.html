@@ -1,0 +1,47 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<section class="developers" *ngIf="!isLoading">
+  <div class="developers__profile" *ngFor="let profile of profiles | async" (click)="onNavigateToProfile(profile.id)">
+    <img
+      [src]="profile.profileAvatar? (profile.profileAvatar | async) : '../../assets/default-avatar.png'"
+      alt=""
+      class="developers__profile__image"
+    />
+    <h1 class="developers__profile__name">{{ profile.name }}</h1>
+    <h3 class="developers__profile__location">{{ profile.location }}</h3>
+    <h3 class="developers__profile__profession">{{ profile.profession }}</h3>
+    <div class="developers__profile__links">
+      <a
+        target="__blank"
+        [href]="profile.stackoverflow"
+        *ngIf="profile.stackoverflow"
+        class="developers__profile__link"
+      >
+        <i class="fab fa-stack-overflow developers__profile__link__icon"></i>
+      </a>
+      <a
+        target="__blank"
+        [href]="profile.github"
+        *ngIf="profile.github"
+        class="developers__profile__link"
+      >
+        <i class="fab fa-github-alt developers__profile__link__icon"></i>
+      </a>
+      <a
+        target="__blank"
+        [href]="profile.twitter"
+        *ngIf="profile.twitter"
+        class="developers__profile__link"
+      >
+        <i class="fab fa-twitter developers__profile__link__icon"></i>
+      </a>
+      <a
+        target="__blank"
+        [href]="profile.website"
+        *ngIf="profile.website"
+        class="developers__profile__link"
+      >
+        <i class="fas fa-globe-americas developers__profile__link__icon"></i>
+      </a>
+    </div>
+  </div>
+</section>
