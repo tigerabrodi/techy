@@ -1,8 +1,15 @@
 <section class="home">
-  <div class="home__box">
-    <p class="home__text">Welcome! This is a place where developers can ask or post things related to Software Development. Learn, Share & Grow 💪</p>
-  </div>
   <div class="home__wrapper">
-
+    <p class="home__text">
+      Welcome! This is a place where developers can ask or post things related
+      to Software Development. Learn, Share & Grow 💪
+    </p>
+  </div>
+  <div class="posts">
+    <div class="posts__top">
+      <div class="posts__top__box"></div>
+      <a [routerLink]="isAuth ? '/post/new' : '/auth'" class="posts__top__link">New Post</a>
+    </div>
+    <div class="posts__bottom"></div>
   </div>
 </section>

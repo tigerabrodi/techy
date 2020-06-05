@@ -1,4 +1,4 @@
-@import "../../styles.scss";
+@import '../../styles.scss';
 
 .home {
   height: 93vh;
@@ -7,15 +7,15 @@
     margin-bottom: 30rem;
   }
   // wrapper for welcome text
-  &__box {
+  &__wrapper {
     position: relative;
     top: 16.4%;
     left: 80%;
     transform: translate(-50%, -50%);
     height: 22%;
     width: 33rem;
-    border-radius: .5rem;
-    border: .3rem solid $navy-light;
+    border-radius: 0.5rem;
+    border: 0.3rem solid $navy-light;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -30,14 +30,14 @@
   }
   // welcome text
   &__text {
-    padding: 0rem .4rem;
+    padding: 0rem 0.4rem;
     color: white;
     font-family: $roboto;
     font-size: 2rem;
     text-align: center;
     text-transform: capitalize;
     line-height: 1.5;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     @include respond(tab-land) {
       font-size: 2.1rem;
     }
@@ -46,23 +46,67 @@
       padding: 0rem 1rem;
     }
     @include respond(phone) {
-      padding: 0rem .5rem;
+      padding: 0rem 0.5rem;
     }
   }
-  // wrapper for posts/questions
-  &__wrapper {
-    position: relative;
-    top: 30%;
-    transform: translate(-50%, -50%);
-    left: 40%;
-    height: 93%;
-    width: 50%;
-    border-radius: .5rem;
-    border: .3rem solid $navy-light;
-    @include respond(tab-port) {
-      top: 51%;
-      left: 50%;
-      width: 90%;
+}
+
+// wrapper for posts & top
+.posts {
+  position: relative;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  left: 40%;
+  height: 93%;
+  width: 50%;
+  border-radius: 0.5rem;
+  border: 0.3rem solid $navy-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  @include respond(tab-port) {
+    top: 51%;
+    left: 50%;
+    width: 90%;
+  }
+
+  &__top {
+    height: 10%;
+    border-bottom: 0.3rem solid $slate-light;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__box {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 50%;
     }
+
+    &__link {
+      padding: 1rem 1.1rem;
+      border-radius: .2rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: white;
+      background: linear-gradient(to right, $pink-orange, $pink);
+      font-family: $roboto;
+      transition: all .3s;
+      &:hover {
+        background: linear-gradient(to right, $blue, $blue-light);
+
+      }
+    }
+  }
+
+  &__bottom {
+    height: 88%;
+    width: 100%;
+    border: 0.1rem solid white;
   }
 }
