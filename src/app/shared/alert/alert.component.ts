@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Alert } from 'src/app/models/alert.model';
 import { UiService } from '../ui.service';
 import { Subscription } from 'rxjs';

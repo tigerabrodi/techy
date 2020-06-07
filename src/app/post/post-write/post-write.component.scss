@@ -1,0 +1,145 @@
+@import '../../../styles.scss';
+
+.post {
+  height: 60vh;
+  &__form {
+    position: relative;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    height: 95%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    border: 0.1rem solid white;
+
+    &__button {
+      color: white;
+      font-family: $roboto;
+      font-weight: 600;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      background: linear-gradient(to right, $pink, $pink-orange);
+      padding: 1.2rem 1.2rem;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0.3rem;
+      outline: none;
+      border: none;
+      &:disabled {
+        opacity: 0.3;
+        &:hover{
+        background: linear-gradient(to right, $pink, $pink-orange);
+        cursor: auto;
+        }
+      }
+      &:hover {
+        background: linear-gradient(to right, $blue, $blue-light);
+        cursor: pointer;
+      }
+    }
+
+    &__date {
+      font-family: $oxanium;
+      font-size: 2rem;
+      font-weight: 600;
+      color: white;
+      text-transform: capitalize;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &__group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      height: 30%;
+      border: 0.1rem solid white;
+      width: 100%;
+    }
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      border: 0.1rem solid white;
+      align-items: center;
+      height: 70%;
+    }
+
+    &__textarea {
+      height: 90%;
+      width: 80%;
+      border: none;
+      outline: none;
+      background-color: $navy-light;
+      color: $blue-light;
+      letter-spacing: 0.1rem;
+      font-family: $roboto;
+      font-weight: bold;
+      font-size: 2rem;
+      padding-left: 1rem;
+      padding-top: 1rem;
+      &::placeholder {
+        padding-top: 1rem;
+        padding-left: 1rem;
+        font-size: 2.3rem;
+        color: $blue-light;
+        font-family: $roboto;
+      }
+    }
+
+    &__input {
+      background-color: $navy-light;
+      padding-left: 1rem;
+      border-radius: 0.3rem;
+      font-family: $roboto;
+      color: $blue-light;
+      letter-spacing: 0.3rem;
+      font-size: 2.5rem;
+      font-weight: bold;
+      height: 70%;
+      outline: none;
+      border: none;
+      width: 80%;
+      text-transform: capitalize;
+      &::placeholder {
+        color: $blue-light;
+        letter-spacing: 0.3rem;
+        text-transform: capitalize;
+      }
+    }
+
+    &__author {
+      font-family: $montserrat;
+      font-size: 1.5rem;
+      color: white;
+      font-weight: 400;
+      text-transform: capitalize;
+    }
+
+    &__pencil {
+      font-size: 2.8rem;
+      color: $blue-light;
+    }
+  }
+}
+
+.input-error {
+  color: red;
+  font-family: $montserrat;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  @include respond(tab-port) {
+    font-size: 1.2rem;
+  }
+}
+
+.border-red {
+  border: 0.2rem solid red !important;
+}

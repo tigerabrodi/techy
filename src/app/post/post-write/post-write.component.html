@@ -1,0 +1,43 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<section class="post">
+  <app-alert></app-alert>
+  <form (ngSubmit)="onSubmit()" [formGroup]="postForm" class="post__form">
+    <h3 class="post__form__date">
+      {{
+        editMode === true
+          ? ((post | async)?.created.seconds * 1000 | date: 'MMMM d, y')
+          : (created | date: 'MMMM d, y')
+      }}
+      By {{ currentUserName }}
+    </h3>
+    <div class="post__form__group">
+      <div class="post__form__wrapper">
+        <i class="fas fa-pencil-alt post__form__pencil"></i>
+        <input
+          formControlName="title"
+          type="text"
+          placeholder="Enter Title"
+          class="post__form__input"
+          required
+          [ngClass]="{ 'border-red': title.invalid && title.touched }"
+        />
+      </div>
+    </div>
+    <div class="post__form__group">
+      <textarea
+        formControlName="body"
+        class="post__form__textarea"
+        placeholder="Enter Body"
+        required
+        [ngClass]="{ 'border-red': body.invalid && body.touched }"
+      ></textarea>
+    </div>
+    <button
+      type="submit"
+      class="post__form__button"
+      [disabled]="postForm.invalid"
+    >
+      submit post
+    </button>
+  </form>
+</section>

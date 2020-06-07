@@ -96,8 +96,7 @@ export class AuthService {
 
   // Update user to have name and profileId
   updateCurrentUser(name: string, profileId: string) {
-    const currentUserRef = this.usersCollection.doc(this.userId);
-
+    const currentUserRef = this.usersCollection.doc<User>(this.userId);
     currentUserRef.set({
       name,
       profileId,

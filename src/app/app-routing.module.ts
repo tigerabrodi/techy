@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./developers/developers.module').then((m) => m.DevelopersModule),
   },
+  {
+    path: 'post',
+    loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
+  },
 ];
 
 @NgModule({

@@ -113,10 +113,14 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
     return this.profileForm.controls;
   }
 
-  // Fire saveProfile function, which updates the profile if profileId is passed otherwise it creates the profile.
+  // Fire saveProfile function, which updates the profile if editMode is passed as true, otherwise it will create a new profile
   onSubmit() {
     if (this.editMode) {
       // edit profile
+      this.uiService.alertAction(
+        'Successfully updated your profile!',
+        'success'
+      );
       const profile: Profile = {
         name: this.f.name.value,
         email: this.f.email.value,
@@ -131,6 +135,10 @@ export class ProfileWriteComponent implements OnInit, OnDestroy {
       this.profileService.saveProfile(profile, this.profileId, true);
     } else {
       // create profile
+      this.uiService.alertAction(
+        'Successfully created your profile!',
+        'success'
+      );
       const profile: Profile = {
         name: this.f.name.value,
         email: this.f.email.value,

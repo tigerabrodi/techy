@@ -35,7 +35,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     private uiService: UiService,
     private auth: AngularFireAuth
   ) {
-    this.uiService.loadingStateChanged.next(this.isLoading);
+    this.uiService.loadingStateChanged.next(true);
   }
 
   ngOnInit(): void {

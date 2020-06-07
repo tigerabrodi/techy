@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth'
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,11 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuth = false;
+  userId: string;
 
   isAuthSubscription: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private auth: AngularFireAuth) {  }
 
   ngOnInit(): void {
     this.isAuth = this.authService.isAuth();
@@ -22,6 +24,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isAuth = isAuth;
       }
     );
+
+    // Get current user id
+    this.auth.currentUser
+      .then((user) => {
+        this.userId = user.uid;
+      })
+      .catch((err) => console.log(err));
+
+
+    if (this.isAuth) {
+
+    }
   }
 
   onClick() {

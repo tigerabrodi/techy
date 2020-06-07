@@ -13,7 +13,6 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class ProfileService {
-  private userId: string | null;
   private profileDoc: AngularFirestoreDocument<Profile>;
   profilesCollection: AngularFirestoreCollection<Profile>;
 
