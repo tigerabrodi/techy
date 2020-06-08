@@ -58,9 +58,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.profileId = user.profileId;
                 const ref = this.storage.ref(`images/${this.profileId}`);
                 this.userAvatarObs = ref.getDownloadURL();
-                this.userAvatarObs.subscribe(() =>
-                  this.uiService.loadingStateChanged.next(false)
-                );
+                this.userAvatarObs.subscribe(() => {
+                  this.uiService.loadingStateChanged.next(false);
+                });
               });
             })
             .catch((err) => console.log(err));
