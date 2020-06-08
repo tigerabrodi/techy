@@ -94,3 +94,14 @@ body {
     transform: scale(1);
   }
 }
+
+@keyframes shakeVertical {
+  50% {
+    transform: translateX(1rem);
+  }
+
+  100% {
+    transform: translateX(0rem);
+  }
+
+}

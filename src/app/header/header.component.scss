@@ -1,4 +1,4 @@
-@import "../../styles.scss";
+@import '../../styles.scss';
 
 .nav {
   height: 7vh;
@@ -6,28 +6,31 @@
   top: 0%;
   width: 100vw;
   background-color: $navy-light;
-  box-shadow: 0rem .2rem .3rem black;
+  box-shadow: 0rem 0.2rem 0.3rem black;
   z-index: 10;
+
   &__wrapper {
     position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 65%;
+    width: 80%;
     height: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     @include respond(tab-port) {
-      width: 90%;
+      width: 95%;
     }
   }
+
   &__brand {
     display: flex;
     align-items: center;
     justify-content: space-around;
     text-decoration: none;
     transition: all 0.2s;
+
     &__title {
       margin-left: 1rem;
       font-family: $roboto;
@@ -42,32 +45,68 @@
         font-size: 2.5rem;
       }
     }
+
     &:hover .nav__brand__title {
       opacity: 0.7;
     }
   }
+
   &__icon {
     height: 4vh;
   }
+
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-around;
     @include respond(phone) {
-      position: absolute;
+      position: fixed;
       flex-direction: column;
       align-items: center;
       height: 34rem;
       width: 25rem;
       visibility: hidden;
       transform: translate(-50%, -55%);
-      top: 390%;
-      left: 70%;
+      top: 420%;
+      left: 30%;
       border-radius: 0.2rem;
       background-color: $navy-light;
       border: 0.3rem solid $pink;
       transition: all 0.2s;
+      box-shadow: 0rem 0rem .3rem black;
     }
+  }
+
+  &__box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40%;
+  }
+
+  &__image {
+    height: 5rem;
+    border-radius: 50%;
+    width: 5rem;
+    padding: .4rem;
+    background-color: $navy;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    transition: all .2s;
+    &:hover {
+      border: .15rem solid white;
+      padding: 0rem;
+    }
+  }
+
+  &__avatar {
+    width: 95%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    height: 95%;
   }
 
   &__link,
@@ -118,6 +157,7 @@
       padding: 1.2rem 1.3rem;
       font-size: 1.9rem;
     }
+
     @include respond(phone) {
       background: transparent;
       color: $slate-light;
@@ -131,11 +171,12 @@
         background: transparent;
       }
     }
+
     &--span {
       font-weight: 700;
       font-size: 1.5rem;
       &::before {
-        content:" • ";
+        content: ' • ';
       }
       @include respond(tab-port) {
         font-size: 1.7rem;
@@ -144,8 +185,19 @@
   }
 
   &__checkbox {
-    visibility: hidden;
-    display: none;
+    &__auth {
+      visibility: hidden;
+      display: none;
+      &:checked ~ .nav__options {
+        visibility: visible;
+        top: 440%;
+      }
+    }
+
+    &__responsive {
+      visibility: hidden;
+      display: none;
+    }
   }
 
   &__hamburger {
@@ -176,30 +228,101 @@
       transition: all 0s;
     }
   }
+
+  &__options {
+    position: fixed;
+    top: 400%;
+    z-index: 10;
+    height: 34rem;
+    width: 24rem;
+    background-color: $navy;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    border: .2rem solid white;
+    border-radius: .2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: $navy-light;
+    box-shadow: 0rem 0rem .3rem black;
+    transition: all .2s;
+    visibility: hidden;
+
+    @include respond(tab-land) {
+      height: 38rem;
+      width: 28rem;
+    }
+
+    @include respond(phone) {
+      left: 40%;
+    }
+
+    &__group {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 40%;
+      width: 100%;
+      cursor: pointer;
+      &:hover {
+        background-color: $slate-dark;
+      }
+      &:hover .nav__options__icon {
+        background-color: $blue;
+        padding: .8rem;
+        border-radius: 50%;
+      }
+      &:hover .nav__options__icon--hand {
+        animation: shakeVertical .7s infinite;
+        opacity: 1;
+      }
+    }
+
+    &__icon {
+      font-size: 3rem;
+      color: white;
+      &--hand {
+        font-size: 2.5rem;
+        color: white;
+        opacity: 0;
+      }
+    }
+
+    &__option {
+      font-family: $roboto;
+      font-weight: 600;
+      color: white;
+      text-transform: uppercase;
+      font-size: 2rem;
+    }
+  }
 }
 
-.nav__checkbox:checked ~ .nav__hamburger .nav__line {
+.nav__check__responsive:checked ~ .nav__hamburger .nav__line {
   background-color: $pink;
   height: 0.5rem;
 }
 
-.nav__checkbox:checked ~ .nav__hamburger .nav__line--1 {
+.nav__checkbox__responsive:checked ~ .nav__hamburger .nav__line--1 {
   transform: rotate(45deg);
   position: relative;
   top: 35%;
+  background-color: $pink;
 }
 
-.nav__checkbox:checked ~ .nav__hamburger .nav__line--2 {
+.nav__checkbox__responsive:checked ~ .nav__hamburger .nav__line--2 {
   visibility: hidden;
 }
 
-.nav__checkbox:checked ~ .nav__hamburger .nav__line--3 {
+.nav__checkbox__responsive:checked ~ .nav__hamburger .nav__line--3 {
   transform: rotate(-45deg);
   position: relative;
   bottom: 32%;
+  background-color: $pink;
 }
 
-.nav__checkbox:checked ~ .nav__header {
+.nav__checkbox__responsive:checked ~ .nav__box .nav__header {
   transform: translate(-50%, -50%);
   visibility: visible;
 }
@@ -210,6 +333,11 @@
   }
 }
 
-.nav__checkbox:checked ~ .nav__header .nav__link {
+.nav__checkbox__responsive:checked ~ .nav__box .nav__header .nav__link {
   opacity: 1 !important;
+}
+
+.nav__checkbox__auth:checked ~ .nav__box .nav__image {
+  padding: 0rem;
+  border: .3rem solid white;
 }

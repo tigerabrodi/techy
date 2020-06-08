@@ -1,4 +1,5 @@
-<section class="home">
+<app-spinner *ngIf="isLoading"></app-spinner>
+<section class="home" *ngIf="!isLoading">
   <div class="home__wrapper">
     <p class="home__text">
       Welcome! This is a place where developers can ask or post things related

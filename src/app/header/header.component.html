@@ -1,11 +1,13 @@
-<nav class="nav">
+<app-spinner *ngIf="isLoading"></app-spinner>
+<nav class="nav" *ngIf="!isLoading">
   <div class="nav__wrapper">
     <a routerLink="/" class="nav__brand">
-      <img src="../../assets/code.png" alt="code" class="nav__icon">
+      <img src="../../assets/code.png" alt="code" class="nav__icon" />
       <h1 class="nav__brand__title">TECHY</h1>
     </a>
 
-    <input type="checkbox" class="nav__checkbox" id="navCheck">
+    <input type="checkbox" class="nav__checkbox__responsive" id="navCheck" />
+    <input type="checkbox" id="navCheckAuth" class="nav__checkbox__auth" />
 
     <label for="navCheck" class="nav__hamburger">
       <span class="nav__line nav__line--1"></span>
@@ -13,10 +15,38 @@
       <span class="nav__line nav__line--3"></span>
     </label>
 
-    <div class="nav__header">
-      <a routerLink="/developers" class="nav__link">Developers</a>
-      <a routerLink="/" class="nav__link">Posts</a>
-      <a *ngIf="!isAuth" routerLink="/auth" class="nav__link nav__link--auth">Sign In<span class="nav__link--auth--span"></span>Up</a>
+    <div class="nav__box">
+      <div class="nav__header">
+        <a routerLink="/developers" class="nav__link">Developers</a>
+        <a routerLink="/" class="nav__link">Posts</a>
+        <a *ngIf="!isAuth" routerLink="/auth" class="nav__link nav__link--auth"
+          >Sign In<span class="nav__link--auth--span"></span>Up</a
+        >
+      </div>
+      <label class="nav__image" for="navCheckAuth" *ngIf="isAuth">
+        <img
+          [src]="
+            userAvatarObs
+              ? (userAvatarObs | async)
+              : '../assets/default-avatar.png'
+          "
+          alt=""
+          class="nav__avatar"
+        />
+      </label>
+    </div>
+
+    <div class="nav__options" *ngIf="isAuth">
+      <div class="nav__options__group nav__options__group--profile" (click)="onNavigateToProfile()">
+        <i class="fas fa-user-circle nav__options__icon"></i>
+        <h1 class="nav__options__option">Profile</h1>
+        <i class="far fa-hand-point-right nav__options__icon--hand"></i>
+      </div>
+      <div class="nav__options__group nav__options__group--logout" (click)="onLogout()">
+        <i class="fas fa-cloud-moon nav__options__icon"></i>
+        <h1 class="nav__options__option">Sign Out</h1>
+        <i class="far fa-hand-point-right nav__options__icon--hand"></i>
+      </div>
     </div>
   </div>
 </nav>

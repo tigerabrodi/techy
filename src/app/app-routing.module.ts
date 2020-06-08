@@ -1,5 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {
+  AngularFireAuthGuard,
+  canActivate,
+  redirectLoggedInTo,
+} from '@angular/fire/auth-guard';
+
+const redirectLoggedInToHome = () => redirectLoggedInTo(['/']);
 
 const routes: Routes = [
   {
@@ -10,6 +17,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    ...canActivate(redirectLoggedInToHome),
   },
   {
     path: 'profile',

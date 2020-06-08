@@ -87,6 +87,7 @@ export class AuthService {
   // Logout user
   logout() {
     this.auth.signOut();
+    this.router.navigate(['/']);
   }
 
   // Return a boolean if the user is authenticated
